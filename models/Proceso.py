@@ -1,7 +1,4 @@
 class Proceso:
-
-
-
    def __init__(self, pid, tamano, tLlegada):
     self.pid = pid
     self.tamano = tamano
