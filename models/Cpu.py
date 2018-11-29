@@ -32,17 +32,13 @@ class Cpu:
 
 	##pid es un string
 	def terminarProceso(self, pid):
+		if self.colaListos and self.colaListos[0].pid == pid:
+			self.Quantum()
 		for x in self.colaListos:
-			if(x.pid == pid):
-				if(self.colaListos[0].pid == x.pid):
-					self.tTotalCpu = time.time() - self.tLlegadaCpu
-					self.tTotalCpu = round(self.tTotalCpu, 4)
-					x.tCPU += self.tTotalCpu
-					print("Tiempo en CPU de Proceso {} al terminar: {}".format(x.pid, x.tCPU))
-					self.tLlegadaCpu = time.time()
-				
+			if(x.pid == pid):				
 				self.listaTerminados.append(x)
 				self.colaListos.remove(x)
+				break
 
 	def __str__(self):
 		CPU = "Proceso en CPU: {}".format(self.colaListos[0].pid)
