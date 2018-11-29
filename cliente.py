@@ -2,7 +2,7 @@ import socket
 
 def sendMessage(msg):
   clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-  clientsocket.connect(('localhost', 8088))
+  clientsocket.connect(('localhost', 8087))
   clientsocket.send(msg)
 
 for i in range(1000):
