@@ -1,5 +1,5 @@
 import proceso
-import datetime
+import time
 
 class Cpu:
 
@@ -17,28 +17,29 @@ class Cpu:
 	def anadirProceso(self, proceso):
 		self.colaListos.append(proceso)
 		if(self.colaListos[0].pid == proceso.pid):
-			self.tLlegadaCpu = datetime.datetime.now().time()
+			self.tLlegadaCpu = time.time()
 
 	def Quantum(self):
 		
-		self.tTotalCpu = (datetime.datetime.combine(datetime.datetime.today(), datetime.datetime.now().time()) - datetime.datetime.combine(datetime.datetime.today(), self.tLlegadaCpu)).total_seconds()
+		self.tTotalCpu = time.time() - self.tLlegadaCpu
 		self.tTotalCpu = round(self.tTotalCpu, 4)
 
 		aux = self.colaListos.pop(0)
 		aux.tCPU += self.tTotalCpu
 		print("Tiempo en CPU de Proceso {}: {}".format(aux.pid, aux.tCPU))
-		self.tLlegadaCpu = datetime.datetime.now().time()
+		self.tLlegadaCpu = time.time()
 		self.colaListos.append(aux)
 
 	##pid es un string
 	def terminarProceso(self, pid):
 		for x in self.colaListos:
 			if(x.pid == pid):
-				if(self.colaListos[0] == x):
-					self.tTotalCpu = (datetime.datetime.combine(datetime.datetime.today(), datetime.datetime.now().time()) - datetime.datetime.combine(datetime.datetime.today(), self.tLlegadaCpu)).total_seconds()
+				if(self.colaListos[0].pid == x.pid):
+					self.tTotalCpu = time.time() - self.tLlegadaCpu
 					self.tTotalCpu = round(self.tTotalCpu, 4)
 					x.tCPU += self.tTotalCpu
 					print("Tiempo en CPU de Proceso {} al terminar: {}".format(x.pid, x.tCPU))
+					self.tLlegadaCpu = time.time()
 				
 				self.listaTerminados.append(x)
 				self.colaListos.remove(x)
