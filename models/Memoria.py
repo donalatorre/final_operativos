@@ -46,8 +46,8 @@ class Memoria:
       if row.tiempo < minTiempo:
         minIndex = i
         minTiempo = row.tiempo
-    oldRow = self.tabla[i]
-    self.tabla[i] = newRow
+    oldRow = self.tabla[minIndex]
+    self.tabla[minIndex] = newRow
     return oldRow
 
   def actualizarTiempo(self, newRow):
