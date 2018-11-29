@@ -24,9 +24,9 @@ class Cpu:
 		self.tTotalCpu = (datetime.datetime.combine(datetime.datetime.today(), datetime.datetime.now().time()) - datetime.datetime.combine(datetime.datetime.today(), self.tLlegadaCpu)).total_seconds()
 		self.tTotalCpu = round(self.tTotalCpu, 4)
 
-		print(self.tTotalCpu)
 		aux = self.colaListos.pop(0)
 		aux.tCPU += self.tTotalCpu
+		print("Tiempo en CPU de Proceso {}: {}".format(aux.pid, aux.tCPU))
 		self.tLlegadaCpu = datetime.datetime.now().time()
 		self.colaListos.append(aux)
 
@@ -38,7 +38,8 @@ class Cpu:
 					self.tTotalCpu = (datetime.datetime.combine(datetime.datetime.today(), datetime.datetime.now().time()) - datetime.datetime.combine(datetime.datetime.today(), self.tLlegadaCpu)).total_seconds()
 					self.tTotalCpu = round(self.tTotalCpu, 4)
 					x.tCPU += self.tTotalCpu
-
+					print("Tiempo en CPU de Proceso {} al terminar: {}".format(x.pid, x.tCPU))
+				
 				self.listaTerminados.append(x)
 				self.colaListos.remove(x)
 
@@ -46,13 +47,20 @@ def main():
 	test = Cpu(1)
 	test.anadirProceso(proceso.Proceso("A", 1024, 0))
 	test.anadirProceso(proceso.Proceso("B", 1024, 0))
-	print(test.colaListos[0].pid)
 	test.Quantum()
-	print(test.colaListos[0].pid)
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
+	test.Quantum()
 	test.terminarProceso("B")
-	print(test.colaListos[0].pid)
-	test.Quantum()
-	print(test.colaListos[0].pid)
 	
 
 if __name__ == '__main__':
