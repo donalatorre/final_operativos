@@ -42,7 +42,7 @@ class Memoria:
   def lru(self, newRow):
     minIndex = 0
     minTiempo = self.tabla[0].tiempo
-    for i, row in enumerate(self.table):
+    for i, row in enumerate(self.tabla):
       if row.tiempo < minTiempo:
         minIndex = i
         minTiempo = row.tiempo
