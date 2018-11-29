@@ -43,10 +43,30 @@ class Cpu:
 				self.listaTerminados.append(x)
 				self.colaListos.remove(x)
 
+	def __str__(self):
+		CPU = "Proceso en CPU: {}".format(self.colaListos[0].pid)
+		listos = "Procesos en cola de listos:"
+		for x in range(len(self.colaListos) - 1, -1, -1):
+			if(x == 0):
+				listos += " {}".format(self.colaListos[x].pid)
+			else:
+				listos += " {},".format(self.colaListos[x].pid)
+
+		terminados = "Procesos terminados:"
+		for x in range(len(self.listaTerminados) - 1, -1, -1):
+			if(x == 0):
+				terminados += " {}".format(self.listaTerminados[x].pid)
+			else:
+				terminados += " {},".format(self.listaTerminados[x].pid)
+		
+		return CPU + "\n" + listos + "\n" + terminados
+
 def main():
 	test = Cpu(1)
+	
 	test.anadirProceso(proceso.Proceso("A", 1024, 0))
 	test.anadirProceso(proceso.Proceso("B", 1024, 0))
+	print(test)
 	test.Quantum()
 	test.Quantum()
 	test.Quantum()
@@ -61,7 +81,7 @@ def main():
 	test.Quantum()
 	test.Quantum()
 	test.terminarProceso("B")
-	
+	print(test)
 
 if __name__ == '__main__':
 	main()
