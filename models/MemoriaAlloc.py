@@ -15,5 +15,6 @@ class MemoriaAlloc:
      if marco != None:
        swap.insert(marco)
 
-
-     
+   def terminarProceso(pid):
+     ram.eliminarProceso(pid)
+     swap.eliminarProceso(pid)
