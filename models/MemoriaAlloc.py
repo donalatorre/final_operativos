@@ -19,8 +19,9 @@ class MemoriaAlloc:
        self.swap.insertar(marco)
 
    def terminarProceso(self, pid):
-     self.ram.eliminarProceso(pid)
-     self.swap.eliminarProceso(pid)
+     row = Row(pid, 0, 0)
+     self.ram.eliminarProceso(row)
+     self.swap.eliminarProceso(row)
 
 
 
