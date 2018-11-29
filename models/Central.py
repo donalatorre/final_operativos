@@ -4,7 +4,9 @@ from MemoriaAlloc import MemoriaAlloc
 from Cpu import Cpu
 class Central:
    def __init__(self, quantum, memoriaReal, memoriaSwap, pageSize):
-     self.memoriaAlloc = MemoriaAlloc(memoriaReal / pageSize, memoriaSwap / pageSize)
+     a = memoriaReal / pageSize
+     b = memoriaSwap / pageSize
+     self.memoriaAlloc = MemoriaAlloc(a,b)
      self.cpu = Cpu(quantum)
      self.pidContador = 1
      self.pageSize = pageSize

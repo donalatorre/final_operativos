@@ -2,6 +2,7 @@ class Memoria:
   def __init__(self, paginas):
     self.tabla = []
     self.limite = paginas
+    print(paginas)
     for i in range(paginas):
       self.tabla.append(Row(-1, -1, -1))
   

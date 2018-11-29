@@ -24,7 +24,10 @@ print >>sys.stderr, 'waiting for a connection'
 connection, client_address = sock.accept()
 
 #accept() returns an open connection between the server and client, along with the address of the client. The connection is actually a different socket on another port (assigned by the kernel). Data is read from the connection with recv() and transmitted with sendall().
-
+quantum = None
+realMemory = None
+swapMemory = None
+pageSize = None
 try:
   print >>sys.stderr, 'connection from', client_address
 

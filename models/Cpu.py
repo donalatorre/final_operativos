@@ -1,4 +1,4 @@
-import proceso
+import Proceso
 import time
 
 class Cpu:
