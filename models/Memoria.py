@@ -31,7 +31,7 @@ class Memoria:
         return True
     return False
 
-    def eliminarProceso(self, newRow):
+  def eliminarProceso(self, newRow):
     somethingChanged = False
     for i, row in enumerate(self.tabla):
       if newRow.pid == row.pid:
