@@ -6,11 +6,11 @@ class Proceso:
     self.tSalida = 0
     self.tCPU = 0
 
-   def terminar(tSalida):
+   def terminar(self, tSalida):
     self.tSalida = tSalida
 
-   def getTurnAround():
+   def getTurnAround(self):
     return tSalida - tLlegada
 
-   def getTiempoEspera():
+   def getTiempoEspera(self):
     return getTurnAround() - tCPU
