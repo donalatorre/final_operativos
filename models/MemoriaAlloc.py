@@ -3,13 +3,13 @@ class MemoriaAlloc:
    def __init__(self, limiteRam, limiteSwap):
      self.ram = Memoria(limiteRam)
      self.swap = Memoria(limiteSwap)
-     self.prueba = 0
+     #self.prueba = 0 #esta variable no existe, solamente se usa para fines de debugging
 
    def accessPage(self, pid, page, tActual):
      row = Row(pid, page, tActual)
      if not self.ram.hasRow(row):
        self.poner(row)
-     self.prueba = self.prueba + 1
+     #self.prueba = self.prueba + 1
      self.ram.actualizarTiempo(row)
      
    def poner(self, row):
