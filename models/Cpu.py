@@ -19,15 +19,20 @@ class Cpu:
 		if(self.colaListos[0].pid == proceso.pid):
 			self.tLlegadaCpu = time.time()
 
-	def Quantum(self):
-		
+	def __TotalCpuTime(self, proceso):
 		self.tTotalCpu = time.time() - self.tLlegadaCpu
 		self.tTotalCpu = round(self.tTotalCpu, 4)
 
-		aux = self.colaListos.pop(0)
-		aux.tCPU += self.tTotalCpu
-		print("Tiempo en CPU de Proceso {}: {}".format(aux.pid, aux.tCPU))
+		proceso.tCPU += self.tTotalCpu
+		print("Tiempo en CPU de Proceso {}: {}".format(proceso.pid, proceso.tCPU))
 		self.tLlegadaCpu = time.time()
+
+
+	def Quantum(self):
+		
+		aux = self.colaListos.pop(0)
+		self.__TotalCpuTime(aux)
+
 		self.colaListos.append(aux)
 
 	##pid es un string
@@ -35,11 +40,7 @@ class Cpu:
 		for x in self.colaListos:
 			if(x.pid == pid):
 				if(self.colaListos[0].pid == x.pid):
-					self.tTotalCpu = time.time() - self.tLlegadaCpu
-					self.tTotalCpu = round(self.tTotalCpu, 4)
-					x.tCPU += self.tTotalCpu
-					print("Tiempo en CPU de Proceso {} al terminar: {}".format(x.pid, x.tCPU))
-					self.tLlegadaCpu = time.time()
+					self.__TotalCpuTime(x)
 				
 				self.listaTerminados.append(x)
 				self.colaListos.remove(x)
