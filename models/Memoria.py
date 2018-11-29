@@ -23,14 +23,21 @@ class Memoria:
         self.tabla[i] = newRow
         return True
     return False
-
-  
+    
   def eliminar(self, newRow):
     for i, row in enumerate(self.tabla):
       if newRow.pid == row.pid and newRow.pagina == row.pagina:
         self.tabla[i] = Row(-1,-1,-1)
         return True
     return False
+
+    def eliminarProceso(self, newRow):
+    somethingChanged = False
+    for i, row in enumerate(self.tabla):
+      if newRow.pid == row.pid:
+        self.tabla[i] = Row(-1,-1,-1)
+        somethingChanged = True
+    return somethingChanged
 
   def lru(self, newRow):
     minIndex = 0
