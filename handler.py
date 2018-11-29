@@ -27,7 +27,6 @@ def handleMessage(data):
   elif inst == "PageSize":
     pageSize = int(data[1])
     central = Central(quantum, realMemory, swapMemory, pageSize)
-    print(central)
     print(4)
   elif inst == "Create":
     print(5)
