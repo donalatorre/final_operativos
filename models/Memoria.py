@@ -62,7 +62,4 @@ class Row:
 
   def __str__(self):
       return "(%d, %d, %d)" % (self.pid, self.pagina, self.tiempo)
-
-  # def __str__(self):
-  #   return "pid: " + str(self.pid) + " pagina: " + str(self.pagina)
   
