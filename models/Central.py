@@ -1,5 +1,7 @@
 import time
 from Proceso import Proceso
+from MemoriaAlloc import MemoriaAlloc
+from Cpu import Cpu
 class Central:
    def __init__(self, quantum, memoriaReal, memoriaSwap, pageSize):
      self.memoriaAlloc = MemoriaAlloc(memoriaReal / pageSize, memoriaSwap / pageSize)
@@ -18,5 +20,4 @@ class Central:
    def matarProceso(self, pid):
      self.cpu.terminarProceso(pid)
      self.memoriaAlloc.terminarProceso(pid)
-     
      
