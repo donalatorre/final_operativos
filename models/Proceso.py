@@ -10,7 +10,7 @@ class Proceso:
     self.tSalida = tSalida
 
    def getTurnAround(self):
-    return tSalida - tLlegada
+    return self.tSalida - self.tLlegada
 
    def getTiempoEspera(self):
-    return getTurnAround() - tCPU
+    return self.getTurnAround() - self.tCPU

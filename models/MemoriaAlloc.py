@@ -7,20 +7,20 @@ class MemoriaAlloc:
 
    def accessPage(self, pid, page, tActual):
      row = Row(pid, page, tActual)
-     if not ram.hasRow(row):
-       poner(row)
-     prueba = prueba + 1
-     ram.actualizarTiempo(row)
+     if not self.ram.hasRow(row):
+       self.poner(row)
+     self.prueba = prueba + 1
+     self.ram.actualizarTiempo(row)
      
    def poner(self, row):
-     swap.eliminar(row)
-     marco = ram.lru(row)
+     self.swap.eliminar(row)
+     marco = self.ram.lru(row)
      if marco != None:
-       swap.insert(marco)
+       self.swap.insert(marco)
 
    def terminarProceso(self, pid):
-     ram.eliminarProceso(pid)
-     swap.eliminarProceso(pid)
+     self.ram.eliminarProceso(pid)
+     self.swap.eliminarProceso(pid)
 
 
 

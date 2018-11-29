@@ -1,4 +1,5 @@
 import time
+from Proceso import Proceso
 class Central:
    def __init__(self, quantum, memoriaReal, memoriaSwap, pageSize):
      self.memoriaAlloc = MemoriaAlloc(memoriaReal / pageSize, memoriaSwap / pageSize)
@@ -8,14 +9,14 @@ class Central:
 
    def crearProceso(self, tamano):
      procesoNuevo = Proceso(pidContador, tamano, time.time())
-     cpu.anadirProceso(procesoNuevo)
-     pidContador = pidContador + 1
+     self.cpu.anadirProceso(procesoNuevo)
+     self.pidContador = self.pidContador + 1
 
    def accederMemoria(self, pid, virtual):
-     memoriaAlloc.accessPage(pid, virtual / pageSize, time.time())
+     self.memoriaAlloc.accessPage(pid, virtual / self.pageSize, time.time())
    
    def matarProceso(self, pid):
-     cpu.terminarProceso(pid)
-     memoriaAlloc.terminarProceso(pid)
+     self.cpu.terminarProceso(pid)
+     self.memoriaAlloc.terminarProceso(pid)
      
      
