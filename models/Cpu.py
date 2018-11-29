@@ -16,7 +16,7 @@ class Cpu:
 	##proceso es un objeto tipo proceso
 	def anadirProceso(self, proceso):
 		self.colaListos.append(proceso)
-		if(self.colaListos[0] == proceso):
+		if(self.colaListos[0].pid == proceso.pid):
 			self.tLlegadaCpu = datetime.datetime.now().time()
 
 	def Quantum(self):
