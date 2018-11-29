@@ -1,4 +1,7 @@
 class Proceso:
+
+
+
    def __init__(self, pid, tamano, tLlegada):
     self.pid = pid
     self.tamano = tamano
@@ -6,11 +9,11 @@ class Proceso:
     self.tSalida = 0
     self.tCPU = 0
 
-   def terminar(self, tSalida):
+   def terminar(tSalida):
     self.tSalida = tSalida
 
-   def getTurnAround(self):
-    return self.tSalida - self.tLlegada
+   def getTurnAround():
+    return tSalida - tLlegada
 
-   def getTiempoEspera(self):
-    return self.getTurnAround() - self.tCPU
+   def getTiempoEspera():
+    return getTurnAround() - tCPU

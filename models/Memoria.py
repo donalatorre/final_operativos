@@ -18,7 +18,7 @@ class Memoria:
     return False
   
   def insertar(self,newRow):
-    for i in range(self.limite -1):
+    for i in range(self.limite):
       if self.tabla[i].pid == -1:
         self.tabla[i] = newRow
         return True
@@ -46,8 +46,8 @@ class Memoria:
       if row.tiempo < minTiempo:
         minIndex = i
         minTiempo = row.tiempo
-    oldRow = self.tabla[i]
-    self.tabla[i] = newRow
+    oldRow = self.tabla[minIndex]
+    self.tabla[minIndex] = newRow
     return oldRow
 
   def actualizarTiempo(self, newRow):
