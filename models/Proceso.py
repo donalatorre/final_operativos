@@ -1,5 +1,5 @@
 class Proceso:
-   def __init__(pid, tamano, tLlegada):
+   def __init__(self, pid, tamano, tLlegada):
     self.pid = pid
     self.tamano = tamano
     self.tLlegada = tLlegada

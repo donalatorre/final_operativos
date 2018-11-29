@@ -1,6 +1,6 @@
 import time
 class Central:
-   def __init__(quantum, memoriaReal, memoriaSwap, pageSize):
+   def __init__(self, quantum, memoriaReal, memoriaSwap, pageSize):
      self.memoriaAlloc = MemoriaAlloc(memoriaReal / pageSize, memoriaSwap / pageSize)
      self.cpu = Cpu(quantum)
      self.pidContador = 1

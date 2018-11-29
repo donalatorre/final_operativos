@@ -1,7 +1,8 @@
+from Memoria import Memoria
 class MemoriaAlloc:
-   def __init__(limiteRam, limiteSwap):
-     ram = Memoria(limiteRam)
-     swap = Memoria(limiteSwap)
+   def __init__(self, limiteRam, limiteSwap):
+     self.ram = Memoria(limiteRam)
+     self.swap = Memoria(limiteSwap)
 
    def accessPage(pid, page, tActual):
      row = Row(pid, page, tActual)
@@ -18,3 +19,5 @@ class MemoriaAlloc:
    def terminarProceso(pid):
      ram.eliminarProceso(pid)
      swap.eliminarProceso(pid)
+
+testMem = MemoriaAlloc(4, 3)
