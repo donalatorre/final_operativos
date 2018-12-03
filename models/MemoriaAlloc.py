@@ -12,8 +12,7 @@ class MemoriaAlloc:
        self.poner(row)
        ret = 1
      #self.prueba = self.prueba + 1
-     self.ram.actualizarTiempo(row)
-     return ret
+     return (self.ram.actualizarTiempo(row), ret)
      
    def poner(self, row):
      self.swap.eliminar(row)
