@@ -23,8 +23,8 @@ def actualProcess(inst, ret, data):
        if int(data[2]) >= central.cpu.colaListos[0].tamano:
          ret += "La direccion excede el tamano del proceso! Se va a ignorar la instruccion"
        else:
-         ret += "Memoria real " + dirReal
          dirReal = str(central.accederMemoria(int(data[1]), int(data[2])))
+	 ret += "Memoria real " + dirReal
      else:
        ret += data[1] + " no se esta ejecutando. Se va a ignorar la instruccion"
    elif inst == "Quantum":
@@ -85,4 +85,5 @@ def handleMessage(data):
       initTime = time.time()
     ret = str(round(time.time() - initTime, 3)) + " "
     ret = actualProcess(inst, ret, data)
+  print ret
   return ret
