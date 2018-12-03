@@ -7,10 +7,13 @@ class MemoriaAlloc:
 
    def accessPage(self, pid, page, tActual):
      row = Row(pid, page, tActual)
+     ret = 0
      if not self.ram.hasRow(row):
        self.poner(row)
+       ret = 1
      #self.prueba = self.prueba + 1
      self.ram.actualizarTiempo(row)
+     return ret
      
    def poner(self, row):
      self.swap.eliminar(row)

@@ -6,11 +6,15 @@ class Memoria:
       self.tabla.append(Row(-1, -1, -1))
   
   def __repr__(self):
-    return "[{}]".format("".join(self.tabla))
+    ret = ""
+    for i, val in enumerate(self.tabla):
+      ret += str(i) + ":" + str(self.tabla[i]) + "\n"
+    if ret:
+      ret = ret[0: len(ret) - 1]
+    return ret
         
   def __str__(self):
-    return "[{}]".format("-".join(self.tabla))
-
+    return self.__repr__()
   def hasRow(self, newRow):
     for row in self.tabla:
       if newRow.pid == row.pid and newRow.pagina == row.pagina:
@@ -54,8 +58,8 @@ class Memoria:
     for i, row in enumerate(self.tabla):
       if newRow.pid == row.pid and newRow.pagina == row.pagina:
         self.tabla[i] = newRow
-        return True
-    return False
+        return i
+    return -1
 
   
 class Row:
@@ -65,8 +69,12 @@ class Row:
     self.tiempo = tiempo
 
   def __repr__(self):
-        return "(%d, %d, %d)\n" % (self.pid, self.pagina, self.tiempo)
+    if self.pid == -1:
+      return "L;"
+    return "%d.%d;" % (self.pid, self.pagina)
 
   def __str__(self):
-      return "(%d, %d, %d)" % (self.pid, self.pagina, self.tiempo)
+      if self.pid == -1:
+	 return "L;"
+      return "%d.%d;" % (self.pid, self.pagina)
   

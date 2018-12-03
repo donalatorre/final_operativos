@@ -1,4 +1,4 @@
-import proceso
+import Proceso
 import time
 
 class Cpu:
@@ -19,25 +19,32 @@ class Cpu:
 		if(self.colaListos[0].pid == proceso.pid):
 			self.tLlegadaCpu = time.time()
 
-	def Quantum(self):
-		
+	def __TotalCpuTime(self, proceso):
 		self.tTotalCpu = time.time() - self.tLlegadaCpu
-		self.tTotalCpu = round(self.tTotalCpu, 4)
 
-		aux = self.colaListos.pop(0)
-		aux.tCPU += self.tTotalCpu
-		print("Tiempo en CPU de Proceso {}: {}".format(aux.pid, aux.tCPU))
+		proceso.tCPU += self.tTotalCpu
 		self.tLlegadaCpu = time.time()
-		self.colaListos.append(aux)
+
+
+	def Quantum(self):
+		if self.colaListos:
+		   aux = self.colaListos.pop(0)
+		   self.__TotalCpuTime(aux)
+		   
+		   self.colaListos.append(aux)
 
 	##pid es un string
 	def terminarProceso(self, pid):
-		if self.colaListos and self.colaListos[0].pid == pid:
-			self.Quantum()
 		for x in self.colaListos:
-			if(x.pid == pid):				
-				self.listaTerminados.append(x)
+			if(x.pid == pid):
+				if pid == self.colaListos[0].pid:
+                        		self.Quantum()
+				else:
+					self.__TotalCpuTime(x)
+				temp = x
 				self.colaListos.remove(x)
+				temp.terminar(time.time())
+				self.listaTerminados.append(temp)
 				break
 
 	def __str__(self):
@@ -57,6 +64,28 @@ class Cpu:
 				terminados += " {},".format(self.listaTerminados[x].pid)
 		
 		return CPU + "\n" + listos + "\n" + terminados
+	def imprimeListos(self):
+		listos = ""
+		for x in range(len(self.colaListos) - 1, -1, -1):
+                        if x != 0:
+				if not listos:
+					listos = "{}".format(self.colaListos[x].pid)
+				else:
+                                	listos = "{}, ".format(self.colaListos[x].pid) + listos
+		return listos
+	def imprimeTerminados(self):
+                listos = ""
+                for x in range(len(self.listaTerminados) - 1, -1, -1):
+                         if not listos:
+                                listos = "{}".format(self.listaTerminados[x].pid)
+                         else:
+                                listos = "{}, ".format(self.listaTerminados[x].pid) + listos
+                return listos
+        def procesoAtendido(self):
+		if self.colaListos:
+			return str(self.colaListos[0].pid)
+		else:
+			return ""
 
 def main():
 	test = Cpu(1)

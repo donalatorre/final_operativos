@@ -11,23 +11,29 @@ class Central:
    
    def cargarPagina(self):
      if self.cpu.colaListos:
-       self.memoriaAlloc.accessPage(self.cpu.colaListos[0].pid, 0, time.time())
+       self.cpu.colaListos[0].accesos += 1
+       self.cpu.colaListos[0].pagefaults += self.memoriaAlloc.accessPage(self.cpu.colaListos[0].pid, 0, time.time())
 
    def quantum(self):
      self.cpu.Quantum()
      self.cargarPagina()
 
    def crearProceso(self, tamano):
-     procesoNuevo = Proceso(pidContador, tamano, time.time())
+     procesoNuevo = Proceso(self.pidContador, tamano, time.time())
      self.cpu.anadirProceso(procesoNuevo)
-     self.cargarPagina()
+     if self.cpu.colaListos[0].pid == procesoNuevo.pid:
+	self.cargarPagina()
      self.pidContador = self.pidContador + 1
 
    def accederMemoria(self, pid, virtual):
-     self.memoriaAlloc.accessPage(pid, virtual / self.pageSize, time.time())
+     index = self.memoriaAlloc.accessPage(pid, virtual / self.pageSize, time.time())
+     self.cargarPagina()
+     return index * self.pageSize + virtual % self.pageSize
    
    def matarProceso(self, pid):
+     has = self.cpu.colaListos[0].pid == pid
      self.cpu.terminarProceso(pid)
      self.memoriaAlloc.terminarProceso(pid)
-     self.cargarPagina()
+     if has:
+        self.cargarPagina()
      
